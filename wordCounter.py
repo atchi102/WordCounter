@@ -35,9 +35,9 @@ for root, subdirs, files in os.walk(walk_dir):
 
             #print('\t- file %s (full path: %s)' % (filename, file_path))
 
-            with open(file_path) as f:
+            with open(file_path,'r') as f:
                 for line in f:
-                    wordcount.update(line.split())
+                   wordcount.update(line.split())
 
-for k,v in wordcount.iteritems():
+for k,v in wordcount.most_common():
     print k, v
