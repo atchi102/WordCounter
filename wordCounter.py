@@ -20,7 +20,7 @@ wordcount = collections.Counter()
 #print('walk_dir = ' + walk_dir)
 
 #print('walk_dir (absolute) = ' + os.path.abspath(walk_dir))
-
+count = 0
 for root, subdirs, files in os.walk(walk_dir):
         #print('--\nroot = ' + root)
         #list_file_path = os.path.join(root, 'my-directory-list.txt')
@@ -34,10 +34,13 @@ for root, subdirs, files in os.walk(walk_dir):
             file_path = os.path.join(root, filename)
 
             #print('\t- file %s (full path: %s)' % (filename, file_path))
-
-            with open(file_path,'r') as f:
-                for line in f:
-                   wordcount.update(line.split())
-
+            try:
+               with open(file_path,'r') as f:
+                  for line in f:
+                     wordcount.update(line.split())
+            except:
+               count += 1 
 for k,v in wordcount.most_common():
     print k, v
+
+print 'Permission errors:',count
